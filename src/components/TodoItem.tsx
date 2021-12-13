@@ -51,15 +51,15 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodos }) => {
     }
   }
 
-  const isDone = todo.status === 'done'
+  const done = todo.status === 'done'
 
   return (
     <ListItem>
-      <ListItemTextWrapper primary={todo.title} secondary={todo.body} isDone={isDone} />
+      <ListItemTextWrapper primary={todo.title} secondary={todo.body} done={done.toString()} />
       <Switch
         edge="end"
         onChange={() => handleUpdateTodoStatus(todo.id || 0)}
-        checked={isDone}
+        checked={done}
       />
       <IconButton type="button" color="primary" onClick={() => handleDeleteTodo(todo.id || 0)}>
         <DeleteIcon />
@@ -68,6 +68,6 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, setTodos }) => {
   )
 }
 
-const ListItemTextWrapper = styled(ListItemText)<{ isDone: boolean }>`
-  text-decoration: ${({isDone}) => isDone ? 'line-through' : 'none' };
+const ListItemTextWrapper = styled(ListItemText)<{ done: string }>`
+  text-decoration: ${({done}) => done === "true" ? 'line-through' : 'none' };
 `

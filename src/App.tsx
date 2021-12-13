@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container } from "@mui/material"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import { TodoList } from "./components/TodoList"
 import { TodoForm } from "./components/TodoForm"
@@ -30,11 +30,13 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <Container maxWidth="sm">
-      <h1>Todo リスト</h1>
-      <TodoForm todos={todos} setTodos={setTodos} />
-      <TodoList todos={todos} setTodos={setTodos} />
-    </Container>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<TodoList todos={todos} setTodos={setTodos} />} />
+        <Route path="/todos" element={<TodoList todos={todos} setTodos={setTodos} />} />
+        <Route path="/todos/new" element={<TodoForm todos={todos} setTodos={setTodos} />} />
+      </Routes>
+    </BrowserRouter>
   )
 };
 
